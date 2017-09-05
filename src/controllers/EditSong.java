@@ -2,11 +2,11 @@ package controllers;
 
 import BusinessLogic.MusicManager;
 import BusinessLogic.Song;
+import BusinessLogic.Tags;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.commons.io.FilenameUtils;
@@ -28,7 +28,7 @@ public class EditSong implements Initializable {
     private TextField songNameField;
 
     @FXML
-    private Label artistNameField;
+    private TextField songArtistField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,11 +46,11 @@ public class EditSong implements Initializable {
     public void setSong(Song song) {
         if (song == null) {
             songNameField.setText("---");
-            artistNameField.setText("---");
+            songArtistField.setText("---");
         } else {
             this.song = song;
             songNameField.setText(this.song.getSongName());
-            artistNameField.setText(this.song.getSongArtist());
+            songArtistField.setText(Tags.getArtist(new File(song.getSongPath())));
         }
     }
 
@@ -68,6 +68,7 @@ public class EditSong implements Initializable {
             File file = new File(song.getSongPath());
             song.setSongName(songNameField.getText());
             file.renameTo(new File(util.getMediaDirectory() + File.separator + songNameField.getText() + "." + FilenameUtils.getExtension(song.getSongPath().toString())));
+            Tags.setArtist(file, songArtistField.getText());
             okClicked = true;
             musicManager.loadSongs();
             dialogStage.close();

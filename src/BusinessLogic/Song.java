@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import java.io.File;
 import java.net.URI;
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ public class Song {
 
     public Song(String songName, URI songPath) {
         this.songName = new SimpleStringProperty(songName);
-        this.songArtist = new SimpleStringProperty("Test Artist");
+        this.songArtist = new SimpleStringProperty(Tags.getArtist(new File(songPath.toString())));
         this.songPath = new SimpleObjectProperty<>(songPath);
         songUuid = new SimpleObjectProperty<>(UUID.randomUUID());
     }
@@ -34,6 +35,7 @@ public class Song {
     @XmlElement
     public String getSongName() {
         if (songName.get().endsWith(".mp3")) {
+
             return songName.get().substring(0, songName.get().length() - 4);
         }
         return songName.get();

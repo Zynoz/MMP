@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="364.0" stylesheets="@../themes/metroLight.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditSong">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="402.0" stylesheets="@../themes/metroLight.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditSong">
    <children>
       <Label alignment="CENTER" layoutX="13.0" layoutY="20.0" text="Song name:" textAlignment="CENTER" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="20.0">
          <font>
@@ -19,16 +19,12 @@
          </font>
       </Label>
       <TextField fx:id="songNameField" alignment="TOP_LEFT" layoutX="118.0" layoutY="20.0" />
-      <Button fx:id="songEditCancel" cancelButton="true" layoutX="255.0" layoutY="56.0" mnemonicParsing="false" onAction="#cancel" prefHeight="33.0" prefWidth="98.0" text="Cancel" textAlignment="CENTER" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="56.0" />
-      <Label fx:id="artistNameField" layoutX="126.0" layoutY="60.0" prefHeight="25.0" prefWidth="149.0" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
+      <Button fx:id="songEditCancel" cancelButton="true" layoutX="273.0" layoutY="56.0" mnemonicParsing="false" onAction="#cancel" prefHeight="35.0" prefWidth="118.0" text="Cancel" textAlignment="CENTER" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="56.0" />
       <Button defaultButton="true" layoutX="274.0" layoutY="16.0" mnemonicParsing="false" onAction="#save" prefHeight="33.0" prefWidth="79.0" text="Save">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <TextField fx:id="songArtistField" alignment="TOP_LEFT" layoutX="118.0" layoutY="56.0" />
    </children>
 </AnchorPane>
