@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane accessibleRole="TOOLTIP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../themes/metroLight.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SettingsController">
+   <children>
+      <Button defaultButton="true" layoutX="497.0" layoutY="353.0" mnemonicParsing="false" onAction="#save" prefHeight="33.0" prefWidth="91.0" text="Save" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button cancelButton="true" layoutX="392.0" layoutY="353.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="115.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="45.0" prefHeight="25.0" prefWidth="81.0" stylesheets="@../themes/metroLight.css" text="Path to music:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="131.0" prefHeight="25.0" prefWidth="81.0" stylesheets="@../themes/metroLight.css" text="Theme:" AnchorPane.leftAnchor="14.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="118.0" layoutY="41.0" mnemonicParsing="false" onAction="#openDir" stylesheets="@../themes/metroLight.css" text="select path..." AnchorPane.topAnchor="41.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="pathLabel" layoutX="253.0" layoutY="41.0" prefHeight="25.0" prefWidth="329.0" stylesheets="@../themes/metroLight.css" />
+      <ComboBox fx:id="themeDropDown" layoutX="118.0" layoutY="130.0" prefWidth="150.0" stylesheets="@../themes/metroLight.css" />
+      <Button layoutX="14.0" layoutY="353.0" mnemonicParsing="false" onAction="#reset" prefHeight="33.0" prefWidth="91.0" text="RESET" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="90.0" prefHeight="25.0" prefWidth="81.0" stylesheets="@../themes/metroLight.css" text="Path to music:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="118.0" layoutY="86.0" mnemonicParsing="false" onAction="#openSecondDir" stylesheets="@../themes/metroLight.css" text="select path...">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="pathLabel2" layoutX="268.0" layoutY="90.0" prefHeight="25.0" prefWidth="329.0" stylesheets="@../themes/metroLight.css" />
+   </children>
+</AnchorPane>

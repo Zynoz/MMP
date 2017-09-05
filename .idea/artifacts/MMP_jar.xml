@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MMP:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MMP_jar</output-path>
+    <root id="archive" name="MMP.jar">
+      <element id="module-output" name="MMP" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/commons-io-2.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/jaudiotagger-2.0.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
