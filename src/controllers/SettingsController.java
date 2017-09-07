@@ -69,7 +69,7 @@ public class SettingsController implements Initializable {
             util.setSecondMediaDirectory(secondSelectedDirectory.getAbsolutePath());
         }
 
-        util.setActiveTheme(themesArray[themeDropDown.getSelectionModel().getSelectedIndex()].getPath());
+        //util.setActiveTheme(themesArray[themeDropDown.getSelectionModel().getSelectedIndex()].getPath());
 
         util.saveProperties();
         Application.setUserAgentStylesheet(null);

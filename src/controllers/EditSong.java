@@ -2,17 +2,23 @@ package controllers;
 
 import BusinessLogic.MusicManager;
 import BusinessLogic.Song;
-import BusinessLogic.Tags;
-import javafx.event.ActionEvent;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.commons.io.FilenameUtils;
+import util.Tags;
 import util.Util;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,12 +29,15 @@ public class EditSong implements Initializable {
     private boolean okClicked;
     private Util util;
     private MusicManager musicManager;
+    private File selectedFile;
+    private Image image;
 
     @FXML
     private TextField songNameField;
-
     @FXML
     private TextField songArtistField;
+    @FXML
+    private ImageView artCover;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,6 +60,13 @@ public class EditSong implements Initializable {
             this.song = song;
             songNameField.setText(this.song.getSongName());
             songArtistField.setText(Tags.getArtist(new File(song.getSongPath())));
+            if (Tags.getCover(song) != null) {
+                Image image = SwingFXUtils.toFXImage(Tags.getCover(song), null);
+                artCover.setImage(image);
+            } else {
+                System.out.println("no image");
+                artCover.setImage(TestController.DEFAULT_IMAGE);
+            }
         }
     }
 
@@ -63,12 +79,34 @@ public class EditSong implements Initializable {
     }
 
     @FXML
+    public void openDir() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose song cover");
+        FileChooser.ExtensionFilter extensionFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg");
+        FileChooser.ExtensionFilter extensionFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+        fileChooser.getExtensionFilters().addAll(extensionFilterJPG, extensionFilterPNG);
+        selectedFile = fileChooser.showOpenDialog(dialogStage);
+        if (selectedFile != null) {
+            try {
+                BufferedImage bufferedImage = ImageIO.read(selectedFile);
+                image = SwingFXUtils.toFXImage(bufferedImage, null);
+                artCover.setImage(image);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
     public void save() {
         if (isInputValid()) {
             File file = new File(song.getSongPath());
             song.setSongName(songNameField.getText());
             file.renameTo(new File(util.getMediaDirectory() + File.separator + songNameField.getText() + "." + FilenameUtils.getExtension(song.getSongPath().toString())));
             Tags.setArtist(file, songArtistField.getText());
+            if (selectedFile != null) {
+                Tags.setCover(song, selectedFile);
+            }
             okClicked = true;
             musicManager.loadSongs();
             dialogStage.close();
@@ -76,7 +114,7 @@ public class EditSong implements Initializable {
     }
 
     @FXML
-    void cancel(ActionEvent actionEvent) {
+    void cancel() {
         dialogStage.close();
     }
 

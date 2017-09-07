@@ -2,11 +2,11 @@ package controllers;
 
 import BusinessLogic.MusicManager;
 import BusinessLogic.Song;
-import BusinessLogic.Tags;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,10 +16,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import util.Tags;
 import util.Util;
 
 import java.awt.*;
@@ -29,6 +32,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TestController implements Initializable {
+
+    public static final Image DEFAULT_IMAGE = new Image("/resources/default.png");
 
     private MusicManager musicManager = new MusicManager();
     private ObservableList<Song> songs = FXCollections.observableArrayList();
@@ -52,10 +57,12 @@ public class TestController implements Initializable {
     private Slider volumeSilder;
     @FXML
     private Slider mediaSeekBar;
+    @FXML
+    private ImageView songCover;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mediaSeekBar.setDisable(true);
+        //mediaSeekBar.setDisable(true);
         util = new Util();
 
         properties();
@@ -140,11 +147,11 @@ public class TestController implements Initializable {
             util.saveProperties();
         }));
 
-        mediaSeekBar.valueProperty().addListener(observable -> {
-            if (mediaSeekBar.isValueChanging()) {
-                musicManager.seek(musicManager.getMediaPlayer().getTotalDuration().multiply(mediaSeekBar.getValue() / 100.0));
-            }
-        });
+//        mediaSeekBar.valueProperty().addListener(observable -> {
+//            if (mediaSeekBar.isValueChanging()) {
+//                musicManager.seek(musicManager.getMediaPlayer().getTotalDuration().multiply(mediaSeekBar.getValue() / 100.0));
+//            }
+//        });
     }
 
     private void properties() {
@@ -274,8 +281,14 @@ public class TestController implements Initializable {
             if (song.getSongArtist() == null) {
                 songArtistView.setText("---");
             } else {
-
                 songArtistView.setText(Tags.getArtist(new File(song.getSongPath())));
+            }
+            if (Tags.getCover(song) != null) {
+                Image image = SwingFXUtils.toFXImage(Tags.getCover(song), null);
+                songCover.setImage(image);
+            } else {
+                songCover.setImage(DEFAULT_IMAGE);
+                System.out.println("image is null");
             }
         }
     }
