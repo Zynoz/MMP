@@ -26,6 +26,7 @@ import util.Tags;
 import util.Util;
 
 import java.awt.*;
+import java.awt.MenuItem;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +34,7 @@ import java.util.ResourceBundle;
 
 public class TestController implements Initializable {
 
-    public static final Image DEFAULT_IMAGE = new Image("/resources/default.png");
+    static final Image DEFAULT_IMAGE = new Image("/resources/default.png");
 
     private MusicManager musicManager = new MusicManager();
     private ObservableList<Song> songs = FXCollections.observableArrayList();
@@ -59,6 +60,8 @@ public class TestController implements Initializable {
     private Slider mediaSeekBar;
     @FXML
     private ImageView songCover;
+    @FXML
+    private MenuItem closeBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -152,6 +155,8 @@ public class TestController implements Initializable {
 //                musicManager.seek(musicManager.getMediaPlayer().getTotalDuration().multiply(mediaSeekBar.getValue() / 100.0));
 //            }
 //        });
+
+
     }
 
     private void properties() {
@@ -167,9 +172,9 @@ public class TestController implements Initializable {
 
     private void playSong(Song song) {
         MediaPlayer mediaPlayer = musicManager.playSong(song);
-        songDurationView.setText(Tags.getDuration(new File(song.getSongPath())));
-        songArtistView.setText(Tags.getArtist(new File(song.getSongPath())));
-        System.out.println(Tags.getArtist(new File(song.getSongPath())));
+        songDurationView.setText(Tags.getDuration(song));
+        songArtistView.setText(Tags.getArtist(song));
+        System.out.println(Tags.getArtist(song));
         volumeSilder.setValue(mediaPlayer.getVolume() * 100);
         playPauseButton.setText("PAUSE");
     }
@@ -195,6 +200,7 @@ public class TestController implements Initializable {
     @FXML
     private void loadMusic() {
         musicManager.loadSongs();
+        songCount.setText(songs.size() + " Songs");
     }
 
     @FXML
@@ -265,8 +271,6 @@ public class TestController implements Initializable {
         Song song = musicManager.getPlayingSong();
         playPauseButton.setText("PAUSE");
         displaySong(song);
-        songDurationView.setText(Tags.getDuration(new File(song.getSongPath())));
-        songArtistView.setText(Tags.getDuration(new File(song.getSongPath())));
         volumeSilder.setValue(musicManager.getVolume() * 100);
     }
 
@@ -276,12 +280,12 @@ public class TestController implements Initializable {
             songNameView.setText("---");
             songDurationView.setText("---");
         } else {
-            songNameView.setText(song.getSongName());
-            songDurationView.setText(Tags.getDuration(new File(song.getSongPath())));
+            songNameView.setText(Tags.getTitle(song));
+            songDurationView.setText(Tags.getDuration(song));
             if (song.getSongArtist() == null) {
                 songArtistView.setText("---");
             } else {
-                songArtistView.setText(Tags.getArtist(new File(song.getSongPath())));
+                songArtistView.setText(Tags.getArtist(song));
             }
             if (Tags.getCover(song) != null) {
                 Image image = SwingFXUtils.toFXImage(Tags.getCover(song), null);

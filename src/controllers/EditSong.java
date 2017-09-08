@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.commons.io.FilenameUtils;
 import util.Tags;
 import util.Util;
 
@@ -58,8 +57,8 @@ public class EditSong implements Initializable {
             songArtistField.setText("---");
         } else {
             this.song = song;
-            songNameField.setText(this.song.getSongName());
-            songArtistField.setText(Tags.getArtist(new File(song.getSongPath())));
+            songNameField.setText(Tags.getTitle(song));
+            songArtistField.setText(Tags.getArtist(song));
             if (Tags.getCover(song) != null) {
                 Image image = SwingFXUtils.toFXImage(Tags.getCover(song), null);
                 artCover.setImage(image);
@@ -100,10 +99,11 @@ public class EditSong implements Initializable {
     @FXML
     public void save() {
         if (isInputValid()) {
-            File file = new File(song.getSongPath());
-            song.setSongName(songNameField.getText());
-            file.renameTo(new File(util.getMediaDirectory() + File.separator + songNameField.getText() + "." + FilenameUtils.getExtension(song.getSongPath().toString())));
-            Tags.setArtist(file, songArtistField.getText());
+            //File file = new File(song.getSongPath());
+            //file.renameTo(new File(util.getMediaDirectory() + File.separator + songNameField.getText() + "." + FilenameUtils.getExtension(song.getSongPath().toString())));
+            //song.setSongName(songNameField.getText());
+            Tags.setTitle(song, songNameField.getText());
+            Tags.setArtist(song, songArtistField.getText());
             if (selectedFile != null) {
                 Tags.setCover(song, selectedFile);
             }
