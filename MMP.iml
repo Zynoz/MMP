@@ -8,7 +8,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="commons-io-2.5" level="project" />
-    <orderEntry type="library" name="jaudiotagger-2.2.6" level="project" />
+    <orderEntry type="library" exported="" name="jaudiotagger-2.2.6-SNAPSHOT" level="project" />
   </component>
 </module>

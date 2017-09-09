@@ -34,10 +34,6 @@ public class Song {
 
     @XmlElement
     public String getSongName() {
-        if (songName.get().endsWith(".mp3")) {
-
-            return songName.get().substring(0, songName.get().length() - 4);
-        }
         return songName.get();
     }
 
@@ -59,11 +55,6 @@ public class Song {
     @XmlElement
     public URI getSongPath() {
         return songPath.get();
-    }
-
-    @XmlElement
-    public void setSongPath(SimpleObjectProperty<URI> songPath) {
-        this.songPath = songPath;
     }
 
     @Override

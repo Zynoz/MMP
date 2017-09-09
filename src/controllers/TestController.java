@@ -1,6 +1,7 @@
 package controllers;
 
 import BusinessLogic.MusicManager;
+import BusinessLogic.MusicPlayer;
 import BusinessLogic.Song;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,6 +40,7 @@ public class TestController implements Initializable {
     private MusicManager musicManager = new MusicManager();
     private ObservableList<Song> songs = FXCollections.observableArrayList();
     private Util util;
+    private MusicPlayer musicPlayer = new MusicPlayer();
 
     @FXML
     private Label songArtistView;
@@ -94,8 +96,6 @@ public class TestController implements Initializable {
             stage.showAndWait();
 
         }
-
-
 
         musicManager.setUtil(util);
         musicManager.loadSongs();
@@ -262,16 +262,17 @@ public class TestController implements Initializable {
         }
     }
 
-    public MusicManager getMusicManager() {
-        return musicManager;
-    }
-
     public void nextSong() {
+        //musicPlayer.playNextSong();
         musicManager.playNextSong();
         Song song = musicManager.getPlayingSong();
         playPauseButton.setText("PAUSE");
         displaySong(song);
         volumeSilder.setValue(musicManager.getVolume() * 100);
+    }
+
+    public void setVolume(double volume) {
+        volumeSilder.setValue(volume * 100);
     }
 
     private void displaySong(Song song) {
@@ -304,6 +305,7 @@ public class TestController implements Initializable {
 
     @FXML
     private void statistics() {
+        //ToDo Statistics
         util.createAlert("Coming soon", "This feature is coming soon", Alert.AlertType.INFORMATION);
     }
 

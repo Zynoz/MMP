@@ -16,7 +16,10 @@ import util.Util;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.Random;
 
 public class MusicManager {
 
@@ -98,6 +101,7 @@ public class MusicManager {
 
     public void playNextSong() {
         playRandomSong(songs.get(generateRandomIndex()));
+
     }
 
     public MediaPlayer playSong(Song song) {
