@@ -244,9 +244,9 @@ public class TestController implements Initializable {
         stage.setScene(scene);
         stage.setAlwaysOnTop(true);
         SettingsController settingsController = fxmlLoader.getController();
+        settingsController.setUtil(util);
         settingsController.setDialogStage(stage);
         settingsController.setMusicManager(musicManager);
-        settingsController.setUtil(util);
         stage.showAndWait();
 
         loadMusic();
@@ -309,4 +309,7 @@ public class TestController implements Initializable {
         util.createAlert("Coming soon", "This feature is coming soon", Alert.AlertType.INFORMATION);
     }
 
+    public void help() {
+
+    }
 }

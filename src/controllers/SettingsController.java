@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import util.Util;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,6 +29,8 @@ public class SettingsController implements Initializable {
     private Label pathLabel2;
     @FXML
     private ComboBox themeDropDown;
+    @FXML
+    private Button showConfig;
     private Stage dialogStage;
     private MusicManager musicManager;
     private File selectedDirectory;
@@ -116,5 +120,18 @@ public class SettingsController implements Initializable {
         this.util = util;
         pathLabel.setText(util.getMediaDirectory());
         pathLabel2.setText(util.getSecondMediaDirectory());
+        if (util.getDevOptions()) {
+            showConfig.setVisible(true);
+        } else {
+            showConfig.setVisible(false);
+        }
+    }
+
+    public void showSettingsFile() {
+        try {
+            java.awt.Desktop.getDesktop().edit(util.getConfigFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

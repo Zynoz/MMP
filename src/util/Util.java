@@ -2,20 +2,29 @@ package util;
 
 import javafx.scene.control.Alert;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Properties;
 
 import static javafx.scene.control.Alert.AlertType;
 
 public class Util {
-    public static final String VERSION = "alpha-2.0";
+    public static final String VERSION = "alpha-3.0";
     private String mediaDirectory;
     private String secondMediaDirectory;
     private File configFile = new File(getUserDataDirectory() + "config.properties");
     private int timesStarted;
     private String activeTheme;
+    private boolean devOptions;
 
     public Util() {
+
+    }
+
+    public File getConfigFile() {
+        return configFile;
     }
 
     public void createAlert(String header, String alert, AlertType alertType) {
@@ -24,6 +33,14 @@ public class Util {
         alert1.setHeaderText(header);
         alert1.setContentText(alert);
         alert1.showAndWait();
+    }
+
+    public boolean getDevOptions() {
+        return devOptions;
+    }
+
+    public void setDevOptions(boolean devOptions) {
+        this.devOptions = devOptions;
     }
 
     public String getActiveTheme() {
@@ -86,6 +103,7 @@ public class Util {
             properties.setProperty("secondMediaDirectory", "");
             properties.setProperty("timesStarted", "0");
             properties.setProperty("activeTheme", getActiveTheme());
+            properties.setProperty("devOptions", String.valueOf(getDevOptions()));
 
             FileWriter fileWriter = new FileWriter(configFile);
             properties.store(fileWriter, "path settings");
@@ -108,6 +126,7 @@ public class Util {
             setSecondMediaDirectory(properties.getProperty("secondMediaDirectory"));
             setTimesStarted(Integer.parseInt(properties.getProperty("timesStarted")));
             setActiveTheme(properties.getProperty("activeTheme"));
+            setDevOptions(Boolean.parseBoolean(properties.getProperty("devOptions")));
 
             fileReader.close();
         } catch (IOException e) {
@@ -125,6 +144,7 @@ public class Util {
             properties.setProperty("secondMediaDirectory", getSecondMediaDirectory());
             properties.setProperty("timesStarted", String.valueOf(getTimesStarted()));
             properties.setProperty("activeTheme", getActiveTheme());
+            properties.setProperty("devOptions", String.valueOf(getDevOptions()));
 
             FileWriter fileWriter = new FileWriter(configFile);
             properties.store(fileWriter, "path settings");

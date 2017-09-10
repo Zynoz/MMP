@@ -60,7 +60,7 @@ public class MusicManager {
         if (result.get() == ButtonType.OK) {
             songs.remove(song);
             File file = new File(song.getSongPath());
-            file.deleteOnExit();
+            file.delete();
         }
     }
 
