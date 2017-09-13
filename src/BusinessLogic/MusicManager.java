@@ -49,6 +49,9 @@ public class MusicManager {
         editSong.setMusicManager(this);
         editSong.setUtil(util);
         stage.showAndWait();
+
+        //not sure
+        update();
     }
 
     public void deleteSong(Song song) {
@@ -62,6 +65,7 @@ public class MusicManager {
             File file = new File(song.getSongPath());
             file.delete();
         }
+        update();
     }
 
     private void addSong(Song song) {
@@ -70,6 +74,7 @@ public class MusicManager {
                 songs.add(song);
             }
         }
+        update();
     }
 
     public void loadSongs() {
@@ -97,6 +102,7 @@ public class MusicManager {
                 }
             }
         }
+        update();
     }
 
     public void playNextSong() {

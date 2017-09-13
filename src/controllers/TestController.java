@@ -69,6 +69,7 @@ public class TestController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //mediaSeekBar.setDisable(true);
         util = new Util();
+        musicManager.setUtil(util);
 
         properties();
 
@@ -263,12 +264,12 @@ public class TestController implements Initializable {
     }
 
     public void nextSong() {
-        //musicPlayer.playNextSong();
-        musicManager.playNextSong();
-        Song song = musicManager.getPlayingSong();
+        musicPlayer.playRandomSong();
+        //musicManager.playNextSong();
+        Song song = musicPlayer.getPlayingSong();
         playPauseButton.setText("PAUSE");
         displaySong(song);
-        volumeSilder.setValue(musicManager.getVolume() * 100);
+        volumeSilder.setValue(musicPlayer.getVolume() * 100);
     }
 
     public void setVolume(double volume) {
