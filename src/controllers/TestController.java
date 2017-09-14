@@ -3,6 +3,7 @@ package controllers;
 import BusinessLogic.MusicManager;
 import BusinessLogic.MusicPlayer;
 import BusinessLogic.Song;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -23,11 +24,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import util.Tags;
 import util.Util;
 
 import java.awt.*;
-import java.awt.MenuItem;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -59,17 +60,14 @@ public class TestController implements Initializable {
     @FXML
     private Slider volumeSilder;
     @FXML
-    private Slider mediaSeekBar;
+    private Slider seekBar;
     @FXML
     private ImageView songCover;
-    @FXML
-    private MenuItem closeBtn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //mediaSeekBar.setDisable(true);
         util = new Util();
-        musicManager.setUtil(util);
 
         properties();
 
@@ -99,8 +97,10 @@ public class TestController implements Initializable {
         }
 
         musicManager.setUtil(util);
+        musicPlayer.setUtil(util);
         musicManager.loadSongs();
         songs = musicManager.getSongs();
+        musicPlayer.setSongs(songs);
         songCount.setText(songs.size() + " Songs");
         TableColumn songName = new TableColumn("Songs");
         songName.setCellValueFactory(new PropertyValueFactory<Song, String>("songName"));
@@ -144,7 +144,7 @@ public class TestController implements Initializable {
         sortedList.comparatorProperty().bind(tableView.comparatorProperty());
         tableView.setItems(sortedList);
 
-        volumeSilder.valueProperty().addListener(observable -> musicManager.setVolume(volumeSilder.getValue() / 100));
+        volumeSilder.valueProperty().addListener(observable -> musicPlayer.setVolume(volumeSilder.getValue() / 100));
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             util.setTimesStarted(util.getTimesStarted() + 1);
@@ -172,12 +172,30 @@ public class TestController implements Initializable {
     }
 
     private void playSong(Song song) {
-        MediaPlayer mediaPlayer = musicManager.playSong(song);
+        MediaPlayer mediaPlayer = musicPlayer.playSong(song);
         songDurationView.setText(Tags.getDuration(song));
         songArtistView.setText(Tags.getArtist(song));
         System.out.println(Tags.getArtist(song));
         volumeSilder.setValue(mediaPlayer.getVolume() * 100);
         playPauseButton.setText("PAUSE");
+        //ToDo only working on first song
+        mediaPlayer.setOnPlaying(() -> {
+            Thread thread = new Thread(() -> {
+                Duration a;
+                while (mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    a = mediaPlayer.getCurrentTime();
+                    int currentTime = (int) a.toSeconds();
+                    System.out.println("current time: " + currentTime);
+                    Platform.runLater(() -> seekBar.setValue(currentTime));
+                }
+            });
+            thread.start();
+        });
     }
 
     @FXML
@@ -247,7 +265,6 @@ public class TestController implements Initializable {
         SettingsController settingsController = fxmlLoader.getController();
         settingsController.setUtil(util);
         settingsController.setDialogStage(stage);
-        settingsController.setMusicManager(musicManager);
         stage.showAndWait();
 
         loadMusic();
@@ -256,7 +273,7 @@ public class TestController implements Initializable {
 
     @FXML
     public void playPause() {
-        if (musicManager.playPause()) {
+        if (musicPlayer.playPause()) {
             playPauseButton.setText("PAUSE");
         } else {
             playPauseButton.setText("PLAY");

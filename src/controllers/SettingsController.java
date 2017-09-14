@@ -1,6 +1,5 @@
 package controllers;
 
-import BusinessLogic.MusicManager;
 import com.sun.javafx.css.StyleManager;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -32,7 +31,6 @@ public class SettingsController implements Initializable {
     @FXML
     private Button showConfig;
     private Stage dialogStage;
-    private MusicManager musicManager;
     private File selectedDirectory;
     private File secondSelectedDirectory;
     private File themesDir = new File("./src/themes/");
@@ -110,10 +108,6 @@ public class SettingsController implements Initializable {
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
-    }
-
-    public void setMusicManager(MusicManager musicManager) {
-        this.musicManager = musicManager;
     }
 
     public void setUtil(Util util) {

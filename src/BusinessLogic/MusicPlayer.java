@@ -7,13 +7,18 @@ import util.Util;
 
 import java.util.Random;
 
-public class MusicPlayer {
+public final class MusicPlayer {
     private Song currentSong;
     private MusicManager musicManager;
     private Util util;
     private MediaPlayer mediaPlayer;
     private double volume = 100;
     private ObservableList<Song> songs;
+    private boolean playPauseStatus;
+
+    public void setUtil(Util util) {
+        this.util = util;
+    }
 
     public void setSongs(ObservableList<Song> songs) {
         this.songs = songs;
@@ -43,8 +48,16 @@ public class MusicPlayer {
     }
 
     public boolean playPause() {
-
-        return false;
+        if (playPauseStatus) {
+            mediaPlayer.pause();
+            playPauseStatus = false;
+            System.out.println("should be paused");
+        } else {
+            mediaPlayer.play();
+            playPauseStatus = true;
+            System.out.println("should be playing");
+        }
+        return playPauseStatus;
     }
 
     public Song getPlayingSong() {
@@ -57,5 +70,6 @@ public class MusicPlayer {
 
     public void setVolume(double volume) {
         this.volume = volume;
+        mediaPlayer.setVolume(volume);
     }
 }
