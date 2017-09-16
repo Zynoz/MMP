@@ -3,7 +3,6 @@ package controllers;
 import BusinessLogic.MusicManager;
 import BusinessLogic.MusicPlayer;
 import BusinessLogic.Song;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -24,7 +23,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import util.Tags;
 import util.Util;
 
@@ -60,13 +58,12 @@ public class TestController implements Initializable {
     @FXML
     private Slider volumeSilder;
     @FXML
-    private Slider seekBar;
+    private ProgressBar seekBar;
     @FXML
     private ImageView songCover;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //mediaSeekBar.setDisable(true);
         util = new Util();
 
         properties();
@@ -151,13 +148,6 @@ public class TestController implements Initializable {
             util.saveProperties();
         }));
 
-//        mediaSeekBar.valueProperty().addListener(observable -> {
-//            if (mediaSeekBar.isValueChanging()) {
-//                musicManager.seek(musicManager.getMediaPlayer().getTotalDuration().multiply(mediaSeekBar.getValue() / 100.0));
-//            }
-//        });
-
-
     }
 
     private void properties() {
@@ -173,29 +163,14 @@ public class TestController implements Initializable {
 
     private void playSong(Song song) {
         MediaPlayer mediaPlayer = musicPlayer.playSong(song);
-        songDurationView.setText(Tags.getDuration(song));
+        int length = Tags.getDuration(song);
+        String minutes = String.valueOf(((length % 86400) % 3600) / 60);
+        String seconds = String.valueOf(((length % 86400) % 3600) % 60);
+        songDurationView.setText((minutes + ":" + seconds));
         songArtistView.setText(Tags.getArtist(song));
         System.out.println(Tags.getArtist(song));
         volumeSilder.setValue(mediaPlayer.getVolume() * 100);
         playPauseButton.setText("PAUSE");
-        //ToDo only working on first song
-        mediaPlayer.setOnPlaying(() -> {
-            Thread thread = new Thread(() -> {
-                Duration a;
-                while (mediaPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    a = mediaPlayer.getCurrentTime();
-                    int currentTime = (int) a.toSeconds();
-                    System.out.println("current time: " + currentTime);
-                    Platform.runLater(() -> seekBar.setValue(currentTime));
-                }
-            });
-            thread.start();
-        });
     }
 
     @FXML
@@ -300,7 +275,10 @@ public class TestController implements Initializable {
             songDurationView.setText("---");
         } else {
             songNameView.setText(Tags.getTitle(song));
-            songDurationView.setText(Tags.getDuration(song));
+            int length = Tags.getDuration(song);
+            String minutes = String.valueOf(((length % 86400) % 3600) / 60);
+            String seconds = String.valueOf(((length % 86400) % 3600) % 60);
+            songDurationView.setText((minutes + ":" + seconds));
             if (song.getSongArtist() == null) {
                 songArtistView.setText("---");
             } else {

@@ -43,17 +43,16 @@ public class Tags {
         }
     }
 
-    //ToDo convert seconds into minutes and seconds.
-    public static String getDuration(Song song) {
+    public static int getDuration(Song song) {
         try {
 
             AudioFile audioFile = AudioFileIO.read(new File(song.getSongPath()));
-            return String.valueOf(audioFile.getAudioHeader().getTrackLength());
+            return (audioFile.getAudioHeader().getTrackLength());
 
         } catch (CannotReadException | IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException e) {
             e.printStackTrace();
         }
-        return "fail";
+        return 0;
     }
 
     public static String getArtist(Song song) {

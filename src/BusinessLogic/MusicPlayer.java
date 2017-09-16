@@ -38,10 +38,6 @@ public final class MusicPlayer {
         return mediaPlayer;
     }
 
-    public void playNextSong() {
-
-    }
-
     public void playRandomSong() {
         Song song = songs.get(new Random().nextInt(songs.size()));
         playSong(song);

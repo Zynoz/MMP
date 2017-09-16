@@ -84,7 +84,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                   <Slider fx:id="seekBar" layoutX="33.0" layoutY="228.0" prefHeight="7.0" prefWidth="182.0"/>
+                   <ProgressBar fx:id="seekBar" layoutX="24.0" layoutY="222.0" prefWidth="200.0" progress="0.0"/>
                </children>
             </AnchorPane>
         </items>
