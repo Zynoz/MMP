@@ -239,7 +239,6 @@ public class TestController implements Initializable {
         stage.setResizable(false);
         stage.setTitle("Preferences");
         stage.setScene(scene);
-        stage.setAlwaysOnTop(true);
         SettingsController settingsController = fxmlLoader.getController();
         settingsController.setUtil(util);
         settingsController.setDialogStage(stage);

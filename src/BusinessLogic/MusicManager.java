@@ -41,8 +41,6 @@ public final class MusicManager {
         editSong.setMusicManager(this);
         editSong.setUtil(util);
         stage.showAndWait();
-
-        //update();
     }
 
     public void deleteSong(Song song) {
@@ -56,7 +54,6 @@ public final class MusicManager {
             File file = new File(song.getSongPath());
             file.delete();
         }
-        //update();
     }
 
     private void addSong(Song song) {
@@ -65,7 +62,6 @@ public final class MusicManager {
                 songs.add(song);
             }
         }
-        //update();
     }
 
     public void loadSongs() {
@@ -73,10 +69,8 @@ public final class MusicManager {
         File primaryDir = new File(util.getMediaDirectory());
         File secondaryDir = new File(util.getSecondMediaDirectory());
 
-        if(primaryDir.mkdir()) {
-        }
-        if (secondaryDir.mkdir()) {
-        }
+        primaryDir.mkdir();
+        secondaryDir.mkdir();
 
         listOfSongs.addAll(Arrays.asList(primaryDir.listFiles()));
         if (secondaryDir.listFiles() != null) {
@@ -93,7 +87,6 @@ public final class MusicManager {
                 }
             }
         }
-        //update();
     }
 
     public void setUtil(Util util) {
