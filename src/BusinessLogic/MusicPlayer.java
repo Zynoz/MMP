@@ -14,7 +14,7 @@ public final class MusicPlayer {
     private MediaPlayer mediaPlayer;
     private double volume = 100;
     private ObservableList<Song> songs;
-    private boolean playPauseStatus;
+    private boolean playPauseStatus = false;
 
     public void setUtil(Util util) {
         this.util = util;
@@ -28,12 +28,14 @@ public final class MusicPlayer {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.dispose();
+            playPauseStatus = false;
         }
 
         Media media = new Media(song.getSongPath().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
         currentSong = song;
+        playPauseStatus = true;
         mediaPlayer.setVolume(volume);
         return mediaPlayer;
     }
@@ -76,5 +78,9 @@ public final class MusicPlayer {
         if (mediaPlayer != null) {
             mediaPlayer.setVolume(volume);
         }
+    }
+
+    public boolean getPlayPauseStatus() {
+        return playPauseStatus;
     }
 }

@@ -64,6 +64,7 @@ public class TestController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        playPauseButton.setDisable(true);
         util = new Util();
 
         properties();
@@ -163,6 +164,7 @@ public class TestController implements Initializable {
     }
 
     private void playSong(Song song) {
+        playPauseButton.setDisable(false);
         MediaPlayer mediaPlayer = musicPlayer.playSong(song);
         int length = Tags.getDuration(song);
         String minutes = String.valueOf(((length % 86400) % 3600) / 60);
@@ -257,6 +259,7 @@ public class TestController implements Initializable {
     }
 
     public void nextSong() {
+        playPauseButton.setDisable(false);
         musicPlayer.playRandomSong();
         Song song = musicPlayer.getPlayingSong();
         playPauseButton.setText("PAUSE");

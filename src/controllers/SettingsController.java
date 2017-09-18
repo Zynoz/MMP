@@ -77,6 +77,7 @@ public class SettingsController implements Initializable {
         Application.setUserAgentStylesheet(null);
         StyleManager.getInstance().addUserAgentStylesheet(util.getActiveTheme());
         dialogStage.close();
+
     }
 
     @FXML
@@ -103,7 +104,8 @@ public class SettingsController implements Initializable {
             }
         }
 
-        themeDropDown.setItems(themes);
+        //ToDo implement theme drop down menu.
+        //themeDropDown.setItems(themes);
     }
 
     public void setDialogStage(Stage dialogStage) {

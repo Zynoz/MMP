@@ -11,7 +11,7 @@ import java.util.Properties;
 import static javafx.scene.control.Alert.AlertType;
 
 public class Util {
-    public static final String VERSION = "alpha-3.0";
+    public static final String VERSION = "beta-0.1";
     private String mediaDirectory;
     private String secondMediaDirectory;
     private File configFile = new File(getUserDataDirectory() + "config.properties");
