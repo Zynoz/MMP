@@ -104,6 +104,7 @@ public class TestController implements Initializable {
         tableView.setItems(songs);
         tableView.getColumns().add(songName);
         displaySong(null);
+        tableView.getSelectionModel().select(0);
 
         setupListeners();
     }
@@ -257,7 +258,6 @@ public class TestController implements Initializable {
 
     public void nextSong() {
         musicPlayer.playRandomSong();
-        //musicManager.playNextSong();
         Song song = musicPlayer.getPlayingSong();
         playPauseButton.setText("PAUSE");
         displaySong(song);

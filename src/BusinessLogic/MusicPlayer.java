@@ -39,8 +39,15 @@ public final class MusicPlayer {
     }
 
     public void playRandomSong() {
+        System.out.println("random");
         Song song = songs.get(new Random().nextInt(songs.size()));
-        playSong(song);
+        if (currentSong == song) {
+            System.out.println("current song is new random song");
+            playRandomSong();
+        } else {
+            System.out.println("current song is not new random song");
+            playSong(song);
+        }
     }
 
     public boolean playPause() {
@@ -66,6 +73,8 @@ public final class MusicPlayer {
 
     public void setVolume(double volume) {
         this.volume = volume;
-        mediaPlayer.setVolume(volume);
+        if (mediaPlayer != null) {
+            mediaPlayer.setVolume(volume);
+        }
     }
 }
