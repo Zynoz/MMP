@@ -7,6 +7,9 @@ import util.Util;
 
 import java.util.Random;
 
+/**
+ * This clas is responsible for playing the music.
+ */
 public final class MusicPlayer {
     private Song currentSong;
     private MusicManager musicManager;
@@ -24,6 +27,11 @@ public final class MusicPlayer {
         this.songs = songs;
     }
 
+    /**
+     * This method plays the specified song.
+     * @param song Song to play
+     * @return Returns the MediaPlayer object which is playing the song.
+     */
     public MediaPlayer playSong(Song song) {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
@@ -40,27 +48,29 @@ public final class MusicPlayer {
         return mediaPlayer;
     }
 
+    /**
+     * This method selects a random song from the play list and calls playSong() with the new random song.
+     */
     public void playRandomSong() {
-        System.out.println("random");
         Song song = songs.get(new Random().nextInt(songs.size()));
         if (currentSong == song) {
-            System.out.println("current song is new random song");
             playRandomSong();
         } else {
-            System.out.println("current song is not new random song");
             playSong(song);
         }
     }
 
+    /**
+     * This method returns if the current song is paused or playing.
+     * @return
+     */
     public boolean playPause() {
         if (playPauseStatus) {
             mediaPlayer.pause();
             playPauseStatus = false;
-            System.out.println("should be paused");
         } else {
             mediaPlayer.play();
             playPauseStatus = true;
-            System.out.println("should be playing");
         }
         return playPauseStatus;
     }
