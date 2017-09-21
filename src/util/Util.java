@@ -106,7 +106,7 @@ public class Util {
             properties.setProperty("devOptions", String.valueOf(getDevOptions()));
 
             FileWriter fileWriter = new FileWriter(configFile);
-            properties.store(fileWriter, "path settings");
+            properties.store(fileWriter, "MMM config");
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
