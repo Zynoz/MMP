@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Initializes and starts music player
+ */
 public class Main extends Application {
 
     @Override
@@ -26,18 +29,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(true);
         primaryStage.getIcons().add(new Image("resources/logo.png"));
-
-//ToDo not working as intended
-//        TestController testController = fxmlLoader.getController();
-//        scene.setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.RIGHT) {
-//                testController.nextSong();
-//            }
-//            if (event.getCode() == KeyCode.SPACE) {
-//                testController.playPause();
-//            }
-//        });
-
         primaryStage.show();
     }
 

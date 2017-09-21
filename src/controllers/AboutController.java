@@ -12,6 +12,9 @@ import util.Util;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This controller is responsible for displaying the about-screen.
+ */
 public class AboutController implements Initializable {
 
     @FXML

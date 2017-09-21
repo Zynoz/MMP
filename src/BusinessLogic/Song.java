@@ -9,6 +9,9 @@ import javax.xml.bind.annotation.XmlElement;
 import java.net.URI;
 import java.util.UUID;
 
+/**
+ * This is the model class and holds most of the data for a song, like song title, song artist, path where the song is on the file system.
+ */
 public class Song {
 
     private SimpleStringProperty songName;

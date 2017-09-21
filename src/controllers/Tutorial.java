@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class is responsible for displaying the tutorial when the user first starts the program.
+ */
 public class Tutorial implements Initializable {
     private Stage stage;
 

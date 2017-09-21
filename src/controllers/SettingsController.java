@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This controller holds and manages all available settings for the application.
+ */
 public class SettingsController implements Initializable {
 
     private Util util;
@@ -44,6 +47,9 @@ public class SettingsController implements Initializable {
         loadThemes();
     }
 
+    /**
+     * This method opens a directory chooser where the user can select the primary directory for songs.
+     */
     @FXML
     public void openDir() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -53,6 +59,9 @@ public class SettingsController implements Initializable {
         }
     }
 
+    /**
+     * This method opens a directory choose where the user can select the secondary directory for songs.
+     */
     @FXML
     private void openSecondDir() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -62,6 +71,9 @@ public class SettingsController implements Initializable {
         }
     }
 
+    /**
+     * This method saves all changes in the preferences.
+     */
     @FXML
     private void save() {
         if (selectedDirectory != null) {
@@ -85,6 +97,9 @@ public class SettingsController implements Initializable {
         dialogStage.close();
     }
 
+    /**
+     * This method resets all preferences to the default settings.
+     */
     @FXML
     private void reset() {
         pathLabel.setText(util.getDefaultMediaDirectory());
@@ -92,9 +107,11 @@ public class SettingsController implements Initializable {
         util.reset();
     }
 
+    /**
+     * This method loads all available themes from the themes folder.
+     * This method is currently not working.
+     */
     private void loadThemes() {
-
-
         if (themesArray == null) {
             System.out.println("null");
         } else {
@@ -123,6 +140,9 @@ public class SettingsController implements Initializable {
         }
     }
 
+    /**
+     * When developer options are activated, the user can click on this button and the config file opens.
+     */
     public void showSettingsFile() {
         try {
             java.awt.Desktop.getDesktop().edit(util.getConfigFile());

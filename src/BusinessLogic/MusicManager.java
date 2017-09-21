@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
+/**
+ * Responsible for loading, deleting, editing and adding songs to the play list.
+ */
 public final class MusicManager {
 
     private ObservableList<Song> songs = FXCollections.observableArrayList();

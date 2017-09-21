@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class is responsible for editing songs.
+ */
 public class EditSong implements Initializable {
 
     private Song song;
@@ -51,6 +54,10 @@ public class EditSong implements Initializable {
         this.dialogStage = dialogStage;
     }
 
+    /**
+     * This method sets songNameField, songArtistField and artCover.
+     * @param song Song to edit.
+     */
     public void setSong(Song song) {
         if (song == null) {
             songNameField.setText("---");
@@ -77,6 +84,10 @@ public class EditSong implements Initializable {
         return okClicked;
     }
 
+    /**
+     * This method is called when the user clicks on the art cover.
+     * It opens a file chooser where the user can select a jpg/png file as the art cover for the song.
+     */
     @FXML
     public void openDir() {
         FileChooser fileChooser = new FileChooser();
@@ -96,6 +107,9 @@ public class EditSong implements Initializable {
         }
     }
 
+    /**
+     * This method saves all changes.
+     */
     @FXML
     public void save() {
         if (isInputValid()) {
@@ -118,6 +132,10 @@ public class EditSong implements Initializable {
         dialogStage.close();
     }
 
+    /**
+     * This method checks if the changed fields for the song are valid.
+     * @return Returns true when the input is valid.
+     */
     private boolean isInputValid() {
         String errorMessage = "";
         if (songNameField.getText() == null || songNameField.getText().length() == 0) {
