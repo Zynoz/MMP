@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="312.0" prefWidth="469.0" stylesheets="@../themes/metroLight.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TestController">
+   <top>
+       <MenuBar stylesheets="@../themes/metroLight.css" BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" onAction="#openMedia" text="Open..."/>
+               <MenuItem mnemonicParsing="false" onAction="#loadMusic" text="Load music"/>
+               <MenuItem mnemonicParsing="false" onAction="#openSettings" text="Preferences"/>
+               <MenuItem mnemonicParsing="false" onAction="#statistics" text="Statistics"/>
+               <MenuItem mnemonicParsing="false" onAction="#close" text="Close"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Edit">
+               <MenuItem mnemonicParsing="false" onAction="#editSong" text="Edit song"/>
+               <MenuItem mnemonicParsing="false" onAction="#deleteSong" text="Delete song"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+               <MenuItem mnemonicParsing="false" onAction="#help" text="Help"/>
+               <MenuItem mnemonicParsing="false" onAction="#about" text="About"/>
+           </Menu>
+       </MenuBar>
+   </top>
+   <center>
+       <SplitPane dividerPositions="0.5010752688172043" prefHeight="160.0" prefWidth="200.0">
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <TextField fx:id="searchBar" layoutX="1.0" layoutY="222.0" prefHeight="25.0" prefWidth="74.0"
+                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+               <TableView fx:id="tableView" layoutX="-62.0" layoutY="-23.0" prefHeight="200.0" prefWidth="200.0"
+                          stylesheets="@../themes/metroLight.css" AnchorPane.bottomAnchor="25.0"
+                          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                   <columnResizePolicy>
+                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                   </columnResizePolicy>
+               </TableView>
+           </AnchorPane>
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="285.0" prefWidth="226.0">
+               <ImageView fx:id="songCover" fitHeight="222.0" fitWidth="231.0" layoutY="4.0" pickOnBounds="true"
+                          preserveRatio="true" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="0.0"
+                          AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0"/>
+               <Label fx:id="songNameView" alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="29.0"
+                      text="Song Name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                      AnchorPane.topAnchor="30.0">
+                   <font>
+                       <Font name="System Bold" size="16.0"/>
+                   </font>
+               </Label>
+               <Label fx:id="songArtistView" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0"
+                      layoutY="54.0" text="Artist Name" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                      AnchorPane.topAnchor="54.0">
+                   <font>
+                       <Font name="System Bold" size="16.0"/>
+                   </font>
+               </Label>
+               <Label fx:id="songDurationView" alignment="CENTER" contentDisplay="CENTER" layoutX="1.0"
+                      layoutY="79.0" stylesheets="@../themes/metroLight.css" text="unkown duration"
+                      AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="76.0">
+                   <font>
+                       <Font name="System Bold" size="16.0"/>
+                   </font>
+               </Label>
+               <Button layoutX="133.0" layoutY="244.0" mnemonicParsing="false" onAction="#nextSong" text="NEXT"
+                       AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="14.0">
+                   <font>
+                       <Font name="System Bold" size="12.0"/>
+                   </font>
+               </Button>
+               <Button fx:id="playPauseButton" layoutX="33.0" layoutY="244.0" mnemonicParsing="false"
+                       onAction="#playPause" text="PAUSE" AnchorPane.bottomAnchor="8.0"
+                       AnchorPane.rightAnchor="106.0">
+                   <font>
+                       <Font name="System Bold" size="12.0"/>
+                   </font>
+               </Button>
+               <Slider fx:id="volumeSilder" layoutX="13.0" layoutY="153.0" orientation="VERTICAL" prefHeight="124.0"
+                       prefWidth="14.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="13.0"/>
+               <Label fx:id="songCount" alignment="CENTER" layoutX="14.0" layoutY="2.0" prefHeight="29.0"
+                      prefWidth="53.0" stylesheets="@../themes/metroLight.css" text="Songs" textAlignment="CENTER"
+                      textOverrun="CLIP" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="2.0">
+                   <font>
+                       <Font name="System Bold" size="12.0"/>
+                   </font>
+               </Label>
+               <ProgressBar fx:id="seekBar" layoutX="24.0" layoutY="222.0" prefWidth="200.0" progress="0.0"/>
+           </AnchorPane>
+       </SplitPane>
+   </center>
+</BorderPane>

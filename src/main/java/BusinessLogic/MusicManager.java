@@ -27,7 +27,7 @@ public final class MusicManager {
 
     public void editSong(Song song) {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/views/editSong.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/editSong.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());

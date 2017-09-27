@@ -40,7 +40,7 @@
     <include name="*.ane"/>
     <include name="*.zip"/>
   </patternset>
-  <patternset id="compiler.resources">
+  <patternset id="compiler.images">
     <exclude name="**/?*.java"/>
     <exclude name="**/?*.form"/>
     <exclude name="**/?*.class"/>
@@ -77,7 +77,7 @@
       <include name="jre/lib/jsse.jar"/>
       <include name="jre/lib/management-agent.jar"/>
       <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/images.jar"/>
       <include name="jre/lib/rt.jar"/>
     </fileset>
   </path>

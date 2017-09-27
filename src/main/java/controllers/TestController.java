@@ -34,7 +34,7 @@ import java.util.ResourceBundle;
 
 public class TestController implements Initializable {
 
-    static final Image DEFAULT_IMAGE = new Image("/resources/default.png");
+    static final Image DEFAULT_IMAGE = new Image("/images/default.png");
 
     private MusicManager musicManager = new MusicManager();
     private ObservableList<Song> songs = FXCollections.observableArrayList();
@@ -76,7 +76,7 @@ public class TestController implements Initializable {
         */
         if (util.getTimesStarted() < 1) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/views/tutorial.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/fxml/tutorial.fxml"));
 
             Scene scene = null;
             try {
@@ -210,7 +210,7 @@ public class TestController implements Initializable {
     @FXML
     private void about() {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/views/about.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/about.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());
@@ -228,7 +228,7 @@ public class TestController implements Initializable {
     @FXML
     private void openSettings() {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/views/settings.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/fxml/settings.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());
