@@ -202,8 +202,11 @@ public class TestController implements Initializable {
 
     @FXML
     public void editSong() {
-        Song song = tableView.getSelectionModel().getSelectedItem();
-        musicManager.editSong(song);
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            musicManager.editSong(tableView.getSelectionModel().getSelectedItem());
+        } else {
+            util.createAlert("Cannot edit song", "No song selected", Alert.AlertType.ERROR);
+        }
 
     }
 
@@ -298,7 +301,11 @@ public class TestController implements Initializable {
 
     @FXML
     private void deleteSong() {
-        musicManager.deleteSong(tableView.getSelectionModel().getSelectedItem());
+        if (tableView.getSelectionModel().getSelectedItem() != null){
+            musicManager.deleteSong(tableView.getSelectionModel().getSelectedItem());
+        } else {
+            util.createAlert("Cannot delete song", "No song selected", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
